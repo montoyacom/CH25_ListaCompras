@@ -8,8 +8,6 @@ let btnClear = document.getElementById("btnClear");
 let alertValidaciones = document.getElementById("alertValidaciones");
 let alertValidacionesTexto = document.getElementById("alertValidacionesTexto");
 
-
-
 btnClear.addEventListener("click", function (event) {
     event.preventDefault();
     txtNombre = "";
@@ -18,10 +16,10 @@ btnClear.addEventListener("click", function (event) {
 
 btnAgregar.addEventListener("click", function (event) {
     event.preventDefault();
-    alertValidacionesTexto.innerHTML="";
-    alertValidaciones.style.display="none";
+    alertValidacionesTexto.innerHTML = "";
+    alertValidaciones.style.display = "none";
     let lista = "los siguientes campos deben ser llenados correctamente:<ul>";
-    
+
     if (txtNombre.value.length == 0) {
         txtNombre.style.border = "solid thin red";
         lista += "<li> Nombre incorrecto.</li>"
@@ -38,7 +36,7 @@ btnAgregar.addEventListener("click", function (event) {
     } else {
         txtNumber.style.border = "";
     }
-    alertValidaciones.insertAdjacentHTML("beforeend", lista);
+    alertValidacionesTexto.insertAdjacentHTML("beforeend", lista);
 });
 
 txtNombre.addEventListener("blur", function (event) {
