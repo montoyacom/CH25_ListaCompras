@@ -5,6 +5,11 @@ let txtNumber = document.getElementById("Number");
 let btnAgregar = document.getElementById("btnAgregar");
 let btnClear = document.getElementById("btnClear");
 
+let alertValidaciones = document.getElementById("alertValidaciones");
+let alertValidacionesTexto = document.getElementById("alertValidacionesTexto");
+
+
+
 btnClear.addEventListener("click", function (event) {
     event.preventDefault();
     txtNombre = "";
@@ -13,21 +18,27 @@ btnClear.addEventListener("click", function (event) {
 
 btnAgregar.addEventListener("click", function (event) {
     event.preventDefault();
+    alertValidacionesTexto.innerHTML="";
+    alertValidaciones.style.display="none";
+    let lista = "los siguientes campos deben ser llenados correctamente:<ul>";
+    
     if (txtNombre.value.length == 0) {
         txtNombre.style.border = "solid thin red";
+        lista += "<li> Nombre incorrecto.</li>"
+        //alertValidacionesTexto.innerHTML = " Se debe escribir un nombre válido.";
+        alertValidaciones.style.display = "block";
     } else {
         txtNombre.style.border = "";
     }
-
-});
-
-btnAgregar.addEventListener("click", function (event) {
-    event.preventDefault();
     if (txtNumber.value.length == 0) {
         txtNumber.style.border = "solid thin red";
+        lista += "<li> Cantidad incorrecta.</li>"
+        //alertValidacionesTexto.innerHTML += " Se debe escribir una cantidad válido.";
+        alertValidaciones.style.display = "block";
     } else {
         txtNumber.style.border = "";
     }
+    alertValidaciones.insertAdjacentHTML("beforeend", lista);
 });
 
 txtNombre.addEventListener("blur", function (event) {
