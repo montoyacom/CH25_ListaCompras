@@ -17,7 +17,7 @@ btnClear.addEventListener("click", function (event) {
 btnAgregar.addEventListener("click", function (event) {
     event.preventDefault();
     alertValidacionesTexto.innerHTML = "";
-    alertValidaciones.style.display = "none";
+    alertValidaciones.style.display = "none"; // Desaparece el letrero
     let lista = "los siguientes campos deben ser llenados correctamente:<ul>";
 
     if (txtNombre.value.length == 0) {
@@ -36,7 +36,12 @@ btnAgregar.addEventListener("click", function (event) {
     } else {
         txtNumber.style.border = "";
     }
+    lista += "</ul>";
     alertValidacionesTexto.insertAdjacentHTML("beforeend", lista);
+    setTimeout(function () {
+        alertValidaciones.style.display = "none"; // Desaparece el letrero
+    }, 3000);
+
 });
 
 txtNombre.addEventListener("blur", function (event) {
