@@ -11,15 +11,32 @@ let alertValidacionesTexto = document.getElementById("alertValidacionesTexto");
 let tabla = document.getElementById("tablaListaCompras"); // se trae la tabla, ¿sería como el diseño?.
 let cuerpoTabla = tabla.getElementsByTagName("tbody"); // busca el cuerpo de la tabla, que es donde va la información.
 
+let contadorProductos = document.getElementById("contadorProductos");
+let productosTotal = document.getElementById("productosTotal");
+let precioTotal = document.getElementById("precioTotal");
+
 let isValid = true;
 let idTimeOut; // ID del temporizador
 let precio = 0; // variable para el precio.
 let contador = 0; // variable para el contador.
+let totalEnProductos = 0; //Incrementara el valor y guardara la cantidad de productos totales.
+let costoTotal = 0;
 
 btnClear.addEventListener("click", function (event) {
     event.preventDefault();
     txtNombre.value = "";
     txtNumber.value = "";
+    cuerpoTabla[0].innerHTML = "";
+    contador = 0; // variable para el contador.
+    costoTotal = 0;
+    totalEnProductos = 0; //Incrementara el valor y guardara la cantidad de productos totales.
+    contadorProductos.innerText = "0";
+    productosTotal.innerText ="0";
+    precioTotal.innerText = "$ 0";
+    localStorage.setItem("contadorProductos",contador);
+    localStorage.setItem("totalEnProductos",totalEnProductos);
+    localStorage.setItem("costoTotal",costoTotal.toFixed(2));
+
 });
 
 function validarCantidad() {
@@ -75,16 +92,24 @@ btnAgregar.addEventListener("click", function (event) {
         contador++;
         let row = `
             <tr>
-                <td>${contador}</td>
+                <th>${contador}</th>
                 <td>${txtNombre.value}</td>
                 <td>${txtNumber.value}</td>
                 <td>${precio}</td>
             </tr>
         `;
         cuerpoTabla[0].insertAdjacentHTML("beforeend", row);
+        contadorProductos.innerText = contador;
+        totalEnProductos += parseFloat(txtNumber.value);
+        productosTotal.innerText = totalEnProductos;
+        costoTotal += precio * parseFloat(txtNumber.value)
+        precioTotal.innerText = `$ ${costoTotal.toFixed(2)}`;
+        localStorage.setItem("contadorProductos",contador);
+        localStorage.setItem("totalEnProductos",totalEnProductos);
+        localStorage.setItem("costoTotal",costoTotal.toFixed(2));
         txtNombre.value = "";
         txtNumber.value = "";
-        txtNombre.focus;  
+        txtNombre.focus();
     };
 
 
